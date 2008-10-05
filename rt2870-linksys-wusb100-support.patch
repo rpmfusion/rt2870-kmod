@@ -1,0 +1,10 @@
+--- old/2008_0925_RT2870_Linux_STA_v1.4.0.0/include/rt2870.h	2008-09-19 01:23:42.000000000 -0400
++++ new/2008_0925_RT2870_Linux_STA_v1.4.0.0/include/rt2870.h	2008-10-04 16:20:58.000000000 -0400
+@@ -143,6 +143,7 @@
+ 	{USB_DEVICE(0x0789,0x0162)}, /* Logitec */		\
+ 	{USB_DEVICE(0x0789,0x0163)}, /* Logitec */		\
+ 	{USB_DEVICE(0x0789,0x0164)}, /* Logitec */		\
++        {USB_DEVICE(0x1737,0x0070)}, /* Linksys WUSB100 */      \
+ 	{ }/* Terminating entry */                      \
+ }
+ 
