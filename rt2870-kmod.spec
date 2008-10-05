@@ -7,7 +7,7 @@
 
 Name:		rt2870-kmod
 Version:	1.4.0.0
-Release:	1%{?dist}
+Release:	1%{?dist}.1
 Summary:	Kernel module for wireless devices with Ralink's rt2870 chipsets
 
 Group:		System Environment/Kernel
@@ -61,7 +61,7 @@ done
 
 %build
 for kernel_version in %{?kernel_versions}; do
- make -C _kmod_build_${kernel_version%%___*} KERNELPATH="${kernel_version##*___}" KERNELRELEASE="${kernel_version%%___*}"
+ make -C _kmod_build_${kernel_version%%___*} LINUX_SRC="${kernel_version##*___}"
 done
 
 %install
@@ -77,6 +77,10 @@ chmod 0755 $RPM_BUILD_ROOT/%{kmodinstdir_prefix}/*/%{kmodinstdir_postfix}/*
 rm -rf $RPM_BUILD_ROOT
 
 %changelog
+* Sun Oct 05 2008 Thorsten Leemhuis <fedora[AT]leemhuis[DOT]info> - 1.4.0.0-1.1
+- adjust make call in build to build properly is running kernel and target
+  kernel are different
+
 * Sat Oct 04 2008  Orcan Ogetbil <orcanbahri[AT]yahoo[DOT]com> - 1.4.0.0-1
 - Rebuild for 1.4.0.0
 
