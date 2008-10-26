@@ -7,7 +7,7 @@
 
 Name:		rt2870-kmod
 Version:	1.4.0.0
-Release:	1%{?dist}.2
+Release:	1%{?dist}.3
 Summary:	Kernel module for wireless devices with Ralink's rt2870 chipsets
 
 Group:		System Environment/Kernel
@@ -25,11 +25,7 @@ BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildRequires:	%{_bindir}/kmodtool
 
 # needed for plague to make sure it builds for i586 and i686
-ExclusiveArch:  i586 i686 x86_64 
-# ppc disabled by knurd on 20081003 as it is known to fail on 2.6.26:
-# https://bugzilla.redhat.com/show_bug.cgi?id=464613
-# ppc and ppc64 disabled by knurd on 20081003 as it is known to fail on 2.6.27:
-# https://bugzilla.redhat.com/show_bug.cgi?id=465486
+ExclusiveArch:  i586 i686 x86_64 ppc ppc64
 
 %{!?kernels:BuildRequires: buildsys-build-rpmfusion-kerneldevpkgs-%{?buildforkernels:%{buildforkernels}}%{!?buildforkernels:current}-%{_target_cpu} }
 
@@ -77,6 +73,9 @@ chmod 0755 $RPM_BUILD_ROOT/%{kmodinstdir_prefix}/*/%{kmodinstdir_postfix}/*
 rm -rf $RPM_BUILD_ROOT
 
 %changelog
+* Sun Oct 26 2008 Thorsten Leemhuis <fedora [AT] leemhuis [DOT] info> - 1.4.0.0-1.3
+- rebuild for latest rawhide kernel; enable ppc and ppc64 again
+
 * Sun Oct 19 2008 Thorsten Leemhuis <fedora [AT] leemhuis [DOT] info> - 1.4.0.0-1.2
 - rebuild for latest rawhide kernel
 
