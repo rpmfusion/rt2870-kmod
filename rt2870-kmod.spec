@@ -7,7 +7,7 @@
 
 Name:		rt2870-kmod
 Version:	1.4.0.0
-Release:	1%{?dist}.10
+Release:	2%{?dist}
 Summary:	Kernel module for wireless devices with Ralink's rt2870 chipsets
 
 Group:		System Environment/Kernel
@@ -15,7 +15,7 @@ License:	GPLv2+
 URL:		http://www.ralinktech.com/ralink/Home/Support/Linux.html
 Source0:	http://www.ralinktech.com.tw/data/drivers/2008_0925_RT2870_Linux_STA_v1.4.0.0.tar.bz2
 Source11:	rt2870-kmodtool-excludekernel-filterfile
-Patch0:		rt2870-2.6.25-iwe_stream-fix.patch
+
 Patch1:		rt2870-linksys-wusb100-support.patch
 Patch2:		rt2870-Makefile.x-fixes.patch
 Patch3:		rt2870-NetworkManager-support.patch
@@ -45,7 +45,6 @@ kmodtool --target %{_target_cpu}  --repo rpmfusion --kmodname %{name} --filterfi
 
 %setup -q -c -T -a 0
 
-%patch0 -p1 -b .iwestream
 %patch1 -p1 -b .linksys
 %patch2 -p1 -b .rpmbuild
 %patch3 -p1 -b .NetworkManager
@@ -73,6 +72,9 @@ chmod 0755 $RPM_BUILD_ROOT/%{kmodinstdir_prefix}/*/%{kmodinstdir_postfix}/*
 rm -rf $RPM_BUILD_ROOT
 
 %changelog
+* Thu Dec 04 2008 Orcan Ogetbil <orcanbahri [AT] yahoo [DOT] com> - 1.4.0.0-2
+- removed the iwe-stream patch since it is not needed for 2.6.27+ kernels
+
 * Tue Dec 02 2008 Thorsten Leemhuis <fedora [AT] leemhuis [DOT] info> - 1.4.0.0-1.10
 - rebuild for latest Fedora kernel;
 
