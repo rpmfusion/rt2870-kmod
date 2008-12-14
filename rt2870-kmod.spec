@@ -3,11 +3,11 @@
 # "buildforkernels newest" macro for just that build; immediately after
 # queuing that build enable the macro again for subsequent builds; that way
 # a new akmod package will only get build when a new one is actually needed
-#define buildforkernels newest
+%define buildforkernels newest
 
 Name:		rt2870-kmod
 Version:	1.4.0.0
-Release:	2%{?dist}
+Release:	2%{?dist}.1
 Summary:	Kernel module for wireless devices with Ralink's rt2870 chipsets
 
 Group:		System Environment/Kernel
@@ -72,6 +72,9 @@ chmod 0755 $RPM_BUILD_ROOT/%{kmodinstdir_prefix}/*/%{kmodinstdir_postfix}/*
 rm -rf $RPM_BUILD_ROOT
 
 %changelog
+* Sun Dec 14 2008 Thorsten Leemhuis <fedora [AT] leemhuis [DOT] info> - 1.4.0.0-2.1
+- rebuild for latest Fedora kernel;
+
 * Thu Dec 04 2008 Orcan Ogetbil <orcanbahri [AT] yahoo [DOT] com> - 1.4.0.0-2
 - removed the iwe-stream patch since it is not needed for 2.6.27+ kernels
 
