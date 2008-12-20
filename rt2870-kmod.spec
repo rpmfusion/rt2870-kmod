@@ -7,7 +7,7 @@
 
 Name:		rt2870-kmod
 Version:	1.4.0.0
-Release:	2%{?dist}
+Release:	2%{?dist}.1
 Summary:	Kernel module for wireless devices with Ralink's rt2870 chipsets
 
 Group:		System Environment/Kernel
@@ -73,6 +73,9 @@ chmod 0755 $RPM_BUILD_ROOT/%{kmodinstdir_prefix}/*/%{kmodinstdir_postfix}/*
 rm -rf $RPM_BUILD_ROOT
 
 %changelog
+* Sat Dec 20 2008 Thorsten Leemhuis <fedora [AT] leemhuis [DOT] info> - 1.4.0.0-2.1
+- rebuild for latest Fedora kernel;
+
 * Fri Dec 19 2008 Jarod Wilson <jarod@wilsonet.com> - 1.4.0.0-2
 - add device ID for Linksys WUSB600N
 
