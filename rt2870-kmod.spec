@@ -52,10 +52,12 @@ kmodtool --target %{_target_cpu}  --repo rpmfusion --kmodname %{name} --filterfi
 %patch4 -p1 -b .tftpboot
 
 for kernel_version in %{?kernel_versions} ; do
- if [[ $kernel_version > "2.6.29" ]]; then
-%patch5 -p1 -b .2.6.29
- fi
  cp -a *RT2870_Linux_STA* _kmod_build_${kernel_version%%___*}
+ pushd _kmod_build_${kernel_version%%___*}
+  if [[ $kernel_version > "2.6.29" ]]; then
+%patch5 -p2 -b .2.6.29
+  fi
+ popd
 done
 
 %build
