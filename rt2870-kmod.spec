@@ -3,11 +3,11 @@
 # "buildforkernels newest" macro for just that build; immediately after
 # queuing that build enable the macro again for subsequent builds; that way
 # a new akmod package will only get build when a new one is actually needed
-%define buildforkernels newest
+#%%define buildforkernels newest
 
 Name:		rt2870-kmod
 Version:	1.4.0.0
-Release:	3%{?dist}.4
+Release:	4%{?dist}
 Summary:	Kernel module for wireless devices with Ralink's rt2870 chipsets
 
 Group:		System Environment/Kernel
@@ -20,6 +20,7 @@ Patch1:		rt2870-linksys-wusb100-wusb600n-support.patch
 Patch2:		rt2870-Makefile.x-fixes.patch
 Patch3:		rt2870-NetworkManager-support.patch
 Patch4:		rt2870-strip-tftpboot-copy.patch
+Patch5:		rt2870-2.6.29-compile.patch
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 BuildRequires:	%{_bindir}/kmodtool
@@ -51,6 +52,9 @@ kmodtool --target %{_target_cpu}  --repo rpmfusion --kmodname %{name} --filterfi
 %patch4 -p1 -b .tftpboot
 
 for kernel_version in %{?kernel_versions} ; do
+ if [[ $kernel_version > "2.6.29" ]]; then
+%patch5 -p1 -b .2.6.29
+ fi
  cp -a *RT2870_Linux_STA* _kmod_build_${kernel_version%%___*}
 done
 
@@ -72,6 +76,9 @@ chmod 0755 $RPM_BUILD_ROOT/%{kmodinstdir_prefix}/*/%{kmodinstdir_postfix}/*
 rm -rf $RPM_BUILD_ROOT
 
 %changelog
+* Sun Jan 11 2009 Orcan Ogetbil <oget [DOT] fedora [AT] gmail [DOT] com> - 1.4.0.0-4
+- Add a patch for compilation against kernels >= 2.6.29
+
 * Sun Jan 11 2009 Thorsten Leemhuis <fedora [AT] leemhuis [DOT] info> - 1.4.0.0-3.4
 - rebuild for latest Fedora kernel;
 
