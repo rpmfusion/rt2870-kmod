@@ -1,11 +1,12 @@
 --- old/2008_0925_RT2870_Linux_STA_v1.4.0.0/include/rt2870.h	2008-09-19 01:23:42.000000000 -0400
-+++ new/2008_0925_RT2870_Linux_STA_v1.4.0.0/include/rt2870.h	2008-10-04 16:20:58.000000000 -0400
-@@ -143,6 +143,8 @@
++++ new/2008_0925_RT2870_Linux_STA_v1.4.0.0/include/rt2870.h	2009-01-15 09:17:50.000000000 -0500
+@@ -143,6 +143,9 @@
  	{USB_DEVICE(0x0789,0x0162)}, /* Logitec */		\
  	{USB_DEVICE(0x0789,0x0163)}, /* Logitec */		\
  	{USB_DEVICE(0x0789,0x0164)}, /* Logitec */		\
 +        {USB_DEVICE(0x1737,0x0070)}, /* Linksys WUSB100 */      \
-+        {USB_DEVICE(0x1737,0x0071)}, /* Linksys WUSB600N */      \
++        {USB_DEVICE(0x1737,0x0071)}, /* Linksys WUSB600N */     \
++        {USB_DEVICE(0x0411,0x00e8)}, /* Buffalo WLI-UC-G300N*/  \
  	{ }/* Terminating entry */                      \
  }
  
