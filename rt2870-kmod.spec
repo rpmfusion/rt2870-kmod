@@ -7,7 +7,7 @@
 
 Name:		rt2870-kmod
 Version:	1.4.0.0
-Release:	5%{?dist}.2
+Release:	6%{?dist}
 Summary:	Kernel module for wireless devices with Ralink's rt2870 chipsets
 
 Group:		System Environment/Kernel
@@ -78,6 +78,9 @@ chmod 0755 $RPM_BUILD_ROOT/%{kmodinstdir_prefix}/*/%{kmodinstdir_postfix}/*
 rm -rf $RPM_BUILD_ROOT
 
 %changelog
+* Sun Jan 25 2009 Orcan Ogetbil <oget [DOT] fedora [AT] gmail [DOT] com> - 1.4.0.0-6
+- Add Belkin F5D8053 support
+
 * Sun Jan 25 2009 Thorsten Leemhuis <fedora [AT] leemhuis [DOT] info> - 1.4.0.0-5.2
 - rebuild for latest Fedora kernel;
 
@@ -108,7 +111,7 @@ rm -rf $RPM_BUILD_ROOT
 * Sun Dec 14 2008 Thorsten Leemhuis <fedora [AT] leemhuis [DOT] info> - 1.4.0.0-2.1
 - rebuild for latest Fedora kernel;
 
-* Thu Dec 04 2008 Orcan Ogetbil <orcanbahri [AT] yahoo [DOT] com> - 1.4.0.0-2
+* Thu Dec 04 2008 Orcan Ogetbil <oget [DOT] fedora [AT] gmail [DOT] com> - 1.4.0.0-2
 - removed the iwe-stream patch since it is not needed for 2.6.27+ kernels
 
 * Sat Nov 22 2008 Thorsten Leemhuis <fedora [AT] leemhuis [DOT] info> - 1.4.0.0-1.9
@@ -139,21 +142,21 @@ rm -rf $RPM_BUILD_ROOT
 - adjust make call in build to build properly is running kernel and target
   kernel are different
 
-* Sat Oct 04 2008  Orcan Ogetbil <orcanbahri[AT]yahoo[DOT]com> - 1.4.0.0-1
+* Sat Oct 04 2008  Orcan Ogetbil <oget [DOT] fedora [AT] gmail [DOT] com> - 1.4.0.0-1
 - Rebuild for 1.4.0.0
 
 * Sat Oct 04 2008 Thorsten Leemhuis <fedora[AT]leemhuis[DOT]info> - 1.3.1.0-4
 - Various small adjustments
 - exclude ppc due to bugs (see comments)
 
-* Sat Sep 26 2008  Orcan Ogetbil <orcanbahri[AT]yahoo[DOT]com> - 1.3.1.0-3
+* Sat Sep 26 2008  Orcan Ogetbil <oget [DOT] fedora [AT] gmail [DOT] com> - 1.3.1.0-3
 - Re-wrote the description, removed supported hardware info. 
 - Renamed SourceDir to SourceName
 
-* Thu Sep 22 2008  Orcan Ogetbil <orcanbahri[AT]yahoo[DOT]com> - 1.3.1.0-2
+* Thu Sep 22 2008  Orcan Ogetbil <oget [DOT] fedora [AT] gmail [DOT] com> - 1.3.1.0-2
 - Some cleanup in the SPEC file to match standards
 - Separated the patches
 - License is GPLv2+
 
-* Thu Sep 20 2008  Orcan Ogetbil <orcanbahri[AT]yahoo[DOT]com> - 1.3.1.0-1
+* Thu Sep 20 2008  Orcan Ogetbil <oget [DOT] fedora [AT] gmail [DOT] com> - 1.3.1.0-1
 - Initial build. The patch fixes compilation problems for kernels >= 2.6.25 . Also adds support for Linksys WUSB100.
