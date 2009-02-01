@@ -7,7 +7,7 @@
 
 Name:		rt2870-kmod
 Version:	1.4.0.0
-Release:	6%{?dist}
+Release:	6%{?dist}.1
 Summary:	Kernel module for wireless devices with Ralink's rt2870 chipsets
 
 Group:		System Environment/Kernel
@@ -78,6 +78,9 @@ chmod 0755 $RPM_BUILD_ROOT/%{kmodinstdir_prefix}/*/%{kmodinstdir_postfix}/*
 rm -rf $RPM_BUILD_ROOT
 
 %changelog
+* Sun Feb 01 2009 Thorsten Leemhuis <fedora [AT] leemhuis [DOT] info> - 1.4.0.0-6.1
+- rebuild for latest Fedora kernel;
+
 * Sun Jan 25 2009 Orcan Ogetbil <oget [DOT] fedora [AT] gmail [DOT] com> - 1.4.0.0-6
 - Add Belkin F5D8053 support
 
