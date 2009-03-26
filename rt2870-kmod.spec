@@ -3,20 +3,18 @@
 # "buildforkernels newest" macro for just that build; immediately after
 # queuing that build enable the macro again for subsequent builds; that way
 # a new akmod package will only get build when a new one is actually needed
-%define buildforkernels newest
+#%%define buildforkernels newest
 
 Name:		rt2870-kmod
-Version:	1.4.0.0
-Release:	7%{?dist}.3
+Version:	2.1.0.0
+Release:	1%{?dist}
 Summary:	Kernel module for wireless devices with Ralink's rt2870 chipsets
 
 Group:		System Environment/Kernel
 License:	GPLv2+
 URL:		http://www.ralinktech.com/ralink/Home/Support/Linux.html
-Source0:	http://www.ralinktech.com.tw/data/drivers/2008_0925_RT2870_Linux_STA_v1.4.0.0.tar.bz2
+Source0:	http://www.ralinktech.com.tw/data/drivers/2009_0302_RT2870_Linux_STA_v2.1.0.0.tar.bz2
 Source11:	rt2870-kmodtool-excludekernel-filterfile
-
-Patch1:		rt2870-additional-devices-support.patch
 Patch2:		rt2870-Makefile.x-fixes.patch
 Patch3:		rt2870-NetworkManager-support.patch
 Patch4:		rt2870-strip-tftpboot-copy.patch
@@ -46,18 +44,18 @@ kmodtool --target %{_target_cpu}  --repo rpmfusion --kmodname %{name} --filterfi
 
 %setup -q -c -T -a 0
 
-%patch1 -p1 -b .additional-devices
-%patch2 -p1 -b .rpmbuild
-%patch3 -p1 -b .NetworkManager
-%patch4 -p1 -b .tftpboot
+%patch2 -p0 -b .rpmbuild
+%patch3 -p0 -b .NetworkManager
+%patch4 -p0 -b .tftpboot
+%patch5 -p0 -b .2.6.29
+
+# Fix permissions
+for ext in c h; do
+ find  . -name "*.$ext" -exec chmod -x '{}' \;
+done
 
 for kernel_version in %{?kernel_versions} ; do
  cp -a *RT2870_Linux_STA* _kmod_build_${kernel_version%%___*}
- pushd _kmod_build_${kernel_version%%___*}
-  if [[ $kernel_version > "2.6.29" ]]; then
-%patch5 -p2 -b .2.6.29
-  fi
- popd
 done
 
 %build
@@ -78,6 +76,10 @@ chmod 0755 $RPM_BUILD_ROOT/%{kmodinstdir_prefix}/*/%{kmodinstdir_postfix}/*
 rm -rf $RPM_BUILD_ROOT
 
 %changelog
+* Thu Mar 26 2009 Orcan Ogetbil <oget [DOT] fedora [AT] gmail [DOT] com> - 2.1.0.0-1
+- New upstream version
+- Drop additional-devices patch since it is upstreamed
+
 * Wed Mar 25 2009 Thorsten Leemhuis <fedora [AT] leemhuis [DOT] info> - 1.4.0.0-7.3
 - rebuild for new kernels
 
