@@ -3,29 +3,28 @@
 # "buildforkernels newest" macro for just that build; immediately after
 # queuing that build enable the macro again for subsequent builds; that way
 # a new akmod package will only get build when a new one is actually needed
-%define buildforkernels newest
+#define buildforkernels newest
 
 Name:		rt2870-kmod
-Version:	2.1.0.0
-Release:	2%{?dist}
+Version:	2.1.1.0
+Release:	1%{?dist}
 Summary:	Kernel module for wireless devices with Ralink's rt2870 chipsets
 
 Group:		System Environment/Kernel
 License:	GPLv2+
 URL:		http://www.ralinktech.com/ralink/Home/Support/Linux.html
-Source0:	http://www.ralinktech.com.tw/data/drivers/2009_0302_RT2870_Linux_STA_v2.1.0.0.tar.bz2
+Source0:	http://www.ralinktech.com.tw/data/drivers/2009_0424_RT2870_Linux_STA_V%{version}.tgz
 Source11:	rt2870-kmodtool-excludekernel-filterfile
 Patch1:		rt2870-no2.4-in-kernelversion.patch
 Patch2:		rt2870-Makefile.x-fixes.patch
 Patch3:		rt2870-NetworkManager-support.patch
 Patch4:		rt2870-strip-tftpboot-copy.patch
-Patch5:		rt2870-2.6.29-compile.patch
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 BuildRequires:	%{_bindir}/kmodtool
 
 # needed for plague to make sure it builds for i586 and i686
-ExclusiveArch:  i586 i686 x86_64 ppc ppc64
+ExclusiveArch:	i586 i686 x86_64 ppc ppc64
 
 %{!?kernels:BuildRequires: buildsys-build-rpmfusion-kerneldevpkgs-%{?buildforkernels:%{buildforkernels}}%{!?buildforkernels:current}-%{_target_cpu} }
 
@@ -44,12 +43,12 @@ either PCI, PCIe or MiniPCI - that use Ralink rt2870 chipsets.
 kmodtool --target %{_target_cpu}  --repo rpmfusion --kmodname %{name} --filterfile %{SOURCE11} %{?buildforkernels:--%{buildforkernels}} %{?kernels:--for-kernels "%{?kernels}"} 2>/dev/null
 
 %setup -q -c -T -a 0
-
-%patch1 -p0 -b .no24
-%patch2 -p0 -b .rpmbuild
-%patch3 -p0 -b .NetworkManager
-%patch4 -p0 -b .tftpboot
-%patch5 -p0 -b .2.6.29
+pushd *RT2870*Linux*STA*
+%patch1 -p1 -b .no24
+%patch2 -p1 -b .rpmbuild
+%patch3 -p1 -b .NetworkManager
+%patch4 -p1 -b .tftpboot
+popd
 
 # Fix permissions
 for ext in c h; do
@@ -57,7 +56,7 @@ for ext in c h; do
 done
 
 for kernel_version in %{?kernel_versions} ; do
- cp -a *RT2870_Linux_STA* _kmod_build_${kernel_version%%___*}
+ cp -a *RT2870*Linux*STA* _kmod_build_${kernel_version%%___*}
 done
 
 %build
@@ -78,6 +77,9 @@ chmod 0755 $RPM_BUILD_ROOT/%{kmodinstdir_prefix}/*/%{kmodinstdir_postfix}/*
 rm -rf $RPM_BUILD_ROOT
 
 %changelog
+* Sat Apr 24 2009 Orcan Ogetbil <oget [DOT] fedora [AT] gmail [DOT] com> - 2.1.1.0-1
+- version update (2.1.1.0)
+
 * Thu Mar 26 2009 Orcan Ogetbil <oget [DOT] fedora [AT] gmail [DOT] com> - 2.1.0.0-2
 - Bugfix: kmod doesn't compile when the kernel version has a "2.4" substring
 
