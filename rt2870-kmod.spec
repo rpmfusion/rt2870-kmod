@@ -3,17 +3,17 @@
 # "buildforkernels newest" macro for just that build; immediately after
 # queuing that build enable the macro again for subsequent builds; that way
 # a new akmod package will only get build when a new one is actually needed
-%define buildforkernels newest
+#%%define buildforkernels newest
 
 Name:		rt2870-kmod
-Version:	2.1.1.0
-Release:	1%{?dist}.2
+Version:	2.1.2.0
+Release:	1%{?dist}
 Summary:	Kernel module for wireless devices with Ralink's rt2870 chipsets
 
 Group:		System Environment/Kernel
 License:	GPLv2+
 URL:		http://www.ralinktech.com/ralink/Home/Support/Linux.html
-Source0:	http://www.ralinktech.com.tw/data/drivers/2009_0424_RT2870_Linux_STA_V%{version}.tgz
+Source0:	http://www.ralinktech.com.tw/data/drivers/2009_0521_RT2870_Linux_STA_V%{version}.tgz
 Source11:	rt2870-kmodtool-excludekernel-filterfile
 Patch1:		rt2870-no2.4-in-kernelversion.patch
 Patch2:		rt2870-Makefile.x-fixes.patch
@@ -77,6 +77,9 @@ chmod 0755 $RPM_BUILD_ROOT/%{kmodinstdir_prefix}/*/%{kmodinstdir_postfix}/*
 rm -rf $RPM_BUILD_ROOT
 
 %changelog
+* Fri May 22 2009 Orcan Ogetbil <oget [DOT] fedora [AT] gmail [DOT] com> - 2.1.2.0-1
+- version update (2.1.2.0)
+
 * Tue May 12 2009 Thorsten Leemhuis <fedora [AT] leemhuis [DOT] info> - 2.1.1.0-1.2
 - rebuild for new kernels
 
