@@ -7,7 +7,7 @@
 
 Name:		rt2870-kmod
 Version:	2.1.2.0
-Release:	1%{?dist}.3
+Release:	2%{?dist}
 Summary:	Kernel module for wireless devices with Ralink's rt2870 chipsets
 
 Group:		System Environment/Kernel
@@ -19,6 +19,7 @@ Patch1:		rt2870-no2.4-in-kernelversion.patch
 Patch2:		rt2870-Makefile.x-fixes.patch
 Patch3:		rt2870-NetworkManager-support.patch
 Patch4:		rt2870-strip-tftpboot-copy.patch
+Patch5:		rt2870-2.6.31-compile.patch
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 BuildRequires:	%{_bindir}/kmodtool
@@ -48,6 +49,7 @@ pushd *RT2870*Linux*STA*
 %patch2 -p1 -b .rpmbuild
 %patch3 -p1 -b .NetworkManager
 %patch4 -p1 -b .tftpboot
+%patch5 -p1 -b .2.6.31
 popd
 
 # Fix permissions
@@ -77,6 +79,9 @@ chmod 0755 $RPM_BUILD_ROOT/%{kmodinstdir_prefix}/*/%{kmodinstdir_postfix}/*
 rm -rf $RPM_BUILD_ROOT
 
 %changelog
+* Mon Aug 03 2009 Orcan Ogetbil <oget [DOT] fedora [AT] gmail [DOT] com>- 2.1.2.0-2
+- Fix for kernels >= 2.6.31
+
 * Fri Jun 05 2009 Thorsten Leemhuis <fedora [AT] leemhuis [DOT] info> - 2.1.2.0-1.3
 - rebuild for final F11 kernel
 
