@@ -7,7 +7,7 @@
 
 Name:		rt2870-kmod
 Version:	2.1.2.0
-Release:	3%{?dist}.6
+Release:	4%{?dist}
 Summary:	Kernel module for wireless devices with Ralink's rt2870 chipsets
 
 Group:		System Environment/Kernel
@@ -15,6 +15,7 @@ License:	GPLv2+
 URL:		http://www.ralinktech.com/ralink/Home/Support/Linux.html
 Source0:	http://www.ralinktech.com.tw/data/drivers/2009_0521_RT2870_Linux_STA_V%{version}.tgz
 Source11:	rt2870-kmodtool-excludekernel-filterfile
+Patch0:		rt2870-additional-devices-support.patch
 Patch1:		rt2870-no2.4-in-kernelversion.patch
 Patch2:		rt2870-Makefile.x-fixes.patch
 Patch3:		rt2870-NetworkManager-support.patch
@@ -46,6 +47,7 @@ kmodtool --target %{_target_cpu}  --repo rpmfusion --kmodname %{name} --filterfi
 
 %setup -q -c -T -a 0
 pushd *RT2870*Linux*STA*
+%patch0 -p1 -b .add.device
 %patch1 -p1 -b .no24
 %patch2 -p1 -b .rpmbuild
 %patch3 -p1 -b .NetworkManager
@@ -81,6 +83,9 @@ chmod 0755 $RPM_BUILD_ROOT/%{kmodinstdir_prefix}/*/%{kmodinstdir_postfix}/*
 rm -rf $RPM_BUILD_ROOT
 
 %changelog
+* Sat Nov 21 2009 Orcan Ogetbil <oget [DOT] fedora [AT] gmail [DOT] com> - 2.1.2.0-4
+- Add Hawking HWDN2 REV-E support
+
 * Tue Nov 10 2009 Thorsten Leemhuis <fedora [AT] leemhuis [DOT] info> - 2.1.2.0-3.6
 - rebuild for F12 release kernel
 
