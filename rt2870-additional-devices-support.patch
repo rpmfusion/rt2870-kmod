@@ -1,0 +1,11 @@
+diff -rupN 2009_0521_RT2870_Linux_STA_V2.1.2.0.old/os/linux/usb_main_dev.c 2009_0521_RT2870_Linux_STA_V2.1.2.0/os/linux/usb_main_dev.c
+--- 2009_0521_RT2870_Linux_STA_V2.1.2.0.old/os/linux/usb_main_dev.c	2009-04-23 05:40:40.000000000 -0400
++++ 2009_0521_RT2870_Linux_STA_V2.1.2.0/os/linux/usb_main_dev.c	2009-11-21 22:12:09.000000000 -0500
+@@ -90,6 +90,7 @@ struct usb_device_id rtusb_usb_id[] = {
+ 	{USB_DEVICE(0x15c5,0x0008)}, /* Amit */
+ 	{USB_DEVICE(0x0E66,0x0001)}, /* Hawking */
+ 	{USB_DEVICE(0x0E66,0x0003)}, /* Hawking */
++	{USB_DEVICE(0x0E66,0x0015)}, /* Hawking HWDN2 REV-E*/
+ 	{USB_DEVICE(0x129B,0x1828)}, /* Siemens */
+ 	{USB_DEVICE(0x157E,0x300E)},	/* U-Media */
+ 	{USB_DEVICE(0x050d,0x805c)},	
