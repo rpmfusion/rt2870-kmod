@@ -7,7 +7,7 @@
 
 Name:		rt2870-kmod
 Version:	2.1.2.0
-Release:	4%{?dist}
+Release:	5%{?dist}
 Summary:	Kernel module for wireless devices with Ralink's rt2870 chipsets
 
 Group:		System Environment/Kernel
@@ -25,9 +25,6 @@ Patch6:		rt2870-suppress-flood.patch
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 BuildRequires:	%{_bindir}/kmodtool
-
-# needed for plague to make sure it builds for i586 and i686
-ExclusiveArch:	i586 i686 x86_64 ppc ppc64
 
 %{!?kernels:BuildRequires: buildsys-build-rpmfusion-kerneldevpkgs-%{?buildforkernels:%{buildforkernels}}%{!?buildforkernels:current}-%{_target_cpu} }
 
@@ -83,6 +80,9 @@ chmod 0755 $RPM_BUILD_ROOT/%{kmodinstdir_prefix}/*/%{kmodinstdir_postfix}/*
 rm -rf $RPM_BUILD_ROOT
 
 %changelog
+* Sat Nov 21 2009 Orcan Ogetbil <oget [DOT] fedora [AT] gmail [DOT] com> - 2.1.2.0-5
+- No need to build i586 kmod anymore
+
 * Sat Nov 21 2009 Orcan Ogetbil <oget [DOT] fedora [AT] gmail [DOT] com> - 2.1.2.0-4
 - Add Hawking HWDN2 REV-E support
 
