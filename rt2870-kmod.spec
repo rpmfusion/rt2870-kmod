@@ -7,7 +7,7 @@
 
 Name:		rt2870-kmod
 Version:	2.1.2.0
-Release:	6%{?dist}.1
+Release:	6%{?dist}.2
 Summary:	Kernel module for wireless devices with Ralink's rt2870 chipsets
 
 Group:		System Environment/Kernel
@@ -80,6 +80,9 @@ chmod 0755 $RPM_BUILD_ROOT/%{kmodinstdir_prefix}/*/%{kmodinstdir_postfix}/*
 rm -rf $RPM_BUILD_ROOT
 
 %changelog
+* Thu Apr 29 2010 Thorsten Leemhuis <fedora [AT] leemhuis [DOT] info> - 2.1.2.0-6.2
+- rebuild for new kernel
+
 * Sun Apr 25 2010 Thorsten Leemhuis <fedora [AT] leemhuis [DOT] info> - 2.1.2.0-6.1
 - rebuild for new kernel
 
