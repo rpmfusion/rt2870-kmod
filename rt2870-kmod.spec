@@ -7,7 +7,7 @@
 
 Name:		rt2870-kmod
 Version:	2.4.0.0
-Release:	1%{?dist}
+Release:	2%{?dist}
 Summary:	Kernel module for wireless devices with Ralink's rt2870 chipsets
 
 Group:		System Environment/Kernel
@@ -20,6 +20,7 @@ Patch0:		rt2870-additional-devices-support.patch
 Patch1:		rt2870-no2.4-in-kernelversion.patch
 Patch2:		rt2870-Makefile.x-fixes.patch
 Patch3:		rt2870-NetworkManager-support.patch
+Patch4:		rt2870-2.6.34.patch
 Patch6:		rt2870-suppress-flood.patch
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
@@ -47,6 +48,7 @@ pushd *RT2870*Linux*STA*
 %patch1 -p1 -b .no24
 %patch2 -p1 -b .rpmbuild
 %patch3 -p1 -b .NetworkManager
+%patch4 -p1 -b .2.6.34
 %patch6 -p1 -b .messageflood
 popd
 
@@ -77,6 +79,9 @@ chmod 0755 $RPM_BUILD_ROOT/%{kmodinstdir_prefix}/*/%{kmodinstdir_postfix}/*
 rm -rf $RPM_BUILD_ROOT
 
 %changelog
+* Sun Jul 04 2010 Orcan Ogetbil <oget [DOT] fedora [AT] gmail [DOT] com> - 2.4.0.0-2
+- Compilation fix against kernel >= 2.6.34
+
 * Sat Jun 26 2010 Orcan Ogetbil <oget [DOT] fedora [AT] gmail [DOT] com> - 2.4.0.0-1
 - Update to 2.4.0.0
 
