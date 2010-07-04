@@ -3,24 +3,24 @@
 # "buildforkernels newest" macro for just that build; immediately after
 # queuing that build enable the macro again for subsequent builds; that way
 # a new akmod package will only get build when a new one is actually needed
-%define buildforkernels newest
+#define buildforkernels newest
 
 Name:		rt2870-kmod
-Version:	2.1.2.0
-Release:	6%{?dist}.20
+Version:	2.4.0.0
+Release:	2%{?dist}
 Summary:	Kernel module for wireless devices with Ralink's rt2870 chipsets
 
 Group:		System Environment/Kernel
 License:	GPLv2+
-URL:		http://www.ralinktech.com/ralink/Home/Support/Linux.html
-Source0:	http://www.ralinktech.com.tw/data/drivers/2009_0521_RT2870_Linux_STA_V%{version}.tgz
+URL:		http://www.ralinktech.com/support.php?s=2
+# No direct links anymore. The sources are downloaded from the above page.
+Source0:	2010_06_25_RT2870_Linux_STA_v2.4.0.0.tgz
 Source11:	rt2870-kmodtool-excludekernel-filterfile
 Patch0:		rt2870-additional-devices-support.patch
 Patch1:		rt2870-no2.4-in-kernelversion.patch
 Patch2:		rt2870-Makefile.x-fixes.patch
 Patch3:		rt2870-NetworkManager-support.patch
-Patch4:		rt2870-strip-tftpboot-copy.patch
-Patch5:		rt2870-2.6.31-compile.patch
+Patch4:		rt2870-2.6.34.patch
 Patch6:		rt2870-suppress-flood.patch
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
@@ -48,14 +48,13 @@ pushd *RT2870*Linux*STA*
 %patch1 -p1 -b .no24
 %patch2 -p1 -b .rpmbuild
 %patch3 -p1 -b .NetworkManager
-%patch4 -p1 -b .tftpboot
-%patch5 -p1 -b .2.6.31
+%patch4 -p1 -b .2.6.34
 %patch6 -p1 -b .messageflood
 popd
 
 # Fix permissions
 for ext in c h; do
- find  . -name "*.$ext" -exec chmod -x '{}' \;
+ find . -name "*.$ext" -exec chmod -x '{}' \;
 done
 
 for kernel_version in %{?kernel_versions} ; do
@@ -80,6 +79,12 @@ chmod 0755 $RPM_BUILD_ROOT/%{kmodinstdir_prefix}/*/%{kmodinstdir_postfix}/*
 rm -rf $RPM_BUILD_ROOT
 
 %changelog
+* Sun Jul 04 2010 Orcan Ogetbil <oget [DOT] fedora [AT] gmail [DOT] com> - 2.4.0.0-2
+- Compilation fix against kernel >= 2.6.34
+
+* Sat Jun 26 2010 Orcan Ogetbil <oget [DOT] fedora [AT] gmail [DOT] com> - 2.4.0.0-1
+- Update to 2.4.0.0
+
 * Fri Jun 18 2010 Thorsten Leemhuis <fedora [AT] leemhuis [DOT] info> - 2.1.2.0-6.20
 - rebuild for new kernel
 
