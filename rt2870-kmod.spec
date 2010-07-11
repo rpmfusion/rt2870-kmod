@@ -6,15 +6,15 @@
 #define buildforkernels newest
 
 Name:		rt2870-kmod
-Version:	2.4.0.0
-Release:	2%{?dist}
+Version:	2.4.0.1
+Release:	1%{?dist}
 Summary:	Kernel module for wireless devices with Ralink's rt2870 chipsets
 
 Group:		System Environment/Kernel
 License:	GPLv2+
 URL:		http://www.ralinktech.com/support.php?s=2
 # No direct links anymore. The sources are downloaded from the above page.
-Source0:	2010_06_25_RT2870_Linux_STA_v2.4.0.0.tgz
+Source0:	2010_0709_RT2870_Linux_STA_v2.4.0.1.tar.bz2
 Source11:	rt2870-kmodtool-excludekernel-filterfile
 Patch0:		rt2870-additional-devices-support.patch
 Patch1:		rt2870-no2.4-in-kernelversion.patch
@@ -79,6 +79,9 @@ chmod 0755 $RPM_BUILD_ROOT/%{kmodinstdir_prefix}/*/%{kmodinstdir_postfix}/*
 rm -rf $RPM_BUILD_ROOT
 
 %changelog
+* Sat Jul 10 2010 Orcan Ogetbil <oget [DOT] fedora [AT] gmail [DOT] com> - 2.4.0.1-1                                                                                                                                                        
+- Update to 2.4.0.1
+
 * Sun Jul 04 2010 Orcan Ogetbil <oget [DOT] fedora [AT] gmail [DOT] com> - 2.4.0.0-2
 - Compilation fix against kernel >= 2.6.34
 
